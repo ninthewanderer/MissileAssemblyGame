@@ -1,0 +1,146 @@
+[gd_scene load_steps=13 format=3 uid="uid://beg0167jje4wm"]
+
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_ig7tw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lquwl"]
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mycd"]
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_272bh"]
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vw27"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+tonemap_mode = 2
+
+[node name="main" type="Node3D"]
+
+[node name="missileAssembly" type="CSGBox3D" parent="."]
+transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, -1.70933, 1.2, -2.51615)
+use_collision = true
+size = Vector3(2.3, 2.3, 0.5)
+
+[node name="missileBay1" type="CSGBox3D" parent="missileAssembly"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0.6, 0.263396)
+size = Vector3(1, 0.4, 0.1)
+material = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="missileBay2" type="CSGBox3D" parent="missileAssembly"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0267947, 0.0999999, 0.253587)
+size = Vector3(1, 0.4, 0.1)
+material = SubResource("StandardMaterial3D_0xm2m")
+
+[node name="launchTube" type="CSGBox3D" parent="."]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 1.9, 1.2, -2.5)
+use_collision = true
+size = Vector3(2.3, 2.3, 0.5)
+
+[node name="tube" type="CSGCylinder3D" parent="launchTube"]
+transform = Transform3D(0.45, -8.9407e-08, -0.779423, 0.779423, -5.09546e-08, 0.45, -2.08616e-07, -0.9, 1.19209e-07, -0.0039072, 0, -0.0221579)
+radius = 0.64
+height = 0.95
+material = SubResource("StandardMaterial3D_h2yge")
+
+[node name="tube2" type="CSGCylinder3D" parent="launchTube/tube"]
+transform = Transform3D(0.648, -1.49012e-08, -1.19209e-07, -4.47035e-08, 0.648, 2.98023e-08, -7.45058e-08, 4.47035e-08, 0.648, -4.76837e-07, -0.154125, 9.53674e-07)
+operation = 2
+radius = 0.64
+height = 1.4375
+
+[node name="fourthPanel" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, -0.866025, 0, 0.866025, 0.5, 0.2, 2.75359, -3)
+use_collision = true
+size = Vector3(2.3, 1.5, 0.5)
+
+[node name="floor" type="CSGBox3D" parent="."]
+transform = Transform3D(4.116, 0, 0, 0, 0.147, 0, 0, 0, 3.43, 0, 0, -1.7)
+use_collision = true
+
+[node name="ceiling" type="CSGBox3D" parent="."]
+transform = Transform3D(5.08244, 0, 0, 0, 0.021609, 0, 0, 0, 5.88256, 0.208244, 2.9, -1.29574)
+use_collision = true
+size = Vector3(1, 1, 0.4)
+
+[node name="radar" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 1.15, -3.55)
+use_collision = true
+size = Vector3(2.3, 2.3, 0.5)
+
+[node name="radarSweep" type="CSGCylinder3D" parent="radar"]
+transform = Transform3D(1, 0, 0, 0, -1.31134e-08, -1, 0, 0.3, -4.37114e-08, -0.1, 1.19209e-07, 0)
+material = SubResource("StandardMaterial3D_1bvp3")
+
+[node name="interceptButton" type="CSGCylinder3D" parent="radar"]
+transform = Transform3D(0.28, 0, 0, 0, -3.67176e-09, -0.28, 0, 0.084, -1.22392e-08, -0.7, 0.3, 0.28)
+height = 1.6
+material = SubResource("StandardMaterial3D_lquwl")
+
+[node name="healthIndicator1" type="CSGPolygon3D" parent="radar"]
+transform = Transform3D(0.28, 0, 0, 0, -3.67176e-09, -0.28, 0, 0.084, -1.22392e-08, 0.6, 0.3, 0.18)
+material = SubResource("StandardMaterial3D_7mycd")
+
+[node name="healthIndicator2" type="CSGPolygon3D" parent="radar"]
+transform = Transform3D(0.28, 0, 0, 0, -3.67176e-09, -0.28, 0, 0.084, -1.22392e-08, 0.6, 1.19209e-07, 0.18)
+material = SubResource("StandardMaterial3D_7mycd")
+
+[node name="healthIndicator3" type="CSGPolygon3D" parent="radar"]
+transform = Transform3D(0.28, 0, 0, 0, -3.67176e-09, -0.28, 0, 0.084, -1.22392e-08, 0.6, -0.3, 0.18)
+material = SubResource("StandardMaterial3D_272bh")
+
+[node name="countermeasures" type="CSGBox3D" parent="radar"]
+transform = Transform3D(0.36, 0, 0, 0, -4.72083e-09, -0.36, 0, 0.108, -1.57361e-08, -0.7, 0.7, 0.3)
+material = SubResource("StandardMaterial3D_5vw27")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="radar/countermeasures"]
+transform = Transform3D(0.36, 0, 0, 0, 0.684, 3.55271e-15, 0, 1.77636e-15, 0.36, -0.277778, 0, -0.277778)
+operation = 2
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="radar/countermeasures"]
+transform = Transform3D(0.36, 0, 0, 0, 0.684, 7.10543e-15, 0, 1.77636e-15, 0.36, 0.277778, 0, -0.277778)
+operation = 2
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="radar/countermeasures"]
+transform = Transform3D(0.36, 0, 0, 0, 0.684, 7.10543e-15, 0, 1.77636e-15, 0.36, -0.277778, 0, 0.277778)
+operation = 2
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="radar/countermeasures"]
+transform = Transform3D(0.36, 0, 0, 0, 0.684, 1.06581e-14, 0, 1.77636e-15, 0.36, 0.277778, 0, 0.277778)
+operation = 2
+
+[node name="impact" type="CSGSphere3D" parent="radar"]
+transform = Transform3D(1.28, 0, 0, 0, 0.2744, 0, 0, 0, 0.084, -0.1, -0.75, 0.25)
+radius = 0.3
+material = SubResource("StandardMaterial3D_lquwl")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 18.2, 0)
+shadow_enabled = true
+
+[node name="ProtoController" parent="." instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.98023e-08, 0, -0.6)
